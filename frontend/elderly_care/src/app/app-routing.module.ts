@@ -5,12 +5,13 @@ import { LoginComponent } from './login/login.component';
 import { DailyCheckinComponent } from './components/daily-checkin/daily-checkin.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
+import { AppointmentComponent } from './components/appointment/appointment.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
   //{ path: 'profile', component: ProfileComponent },
- // { path: 'medication-appointments', component: MedicationAppointmentsComponent },
+ { path: 'medication-appointments', component: AppointmentComponent },
   { path: 'daily-check-in', component: DailyCheckinComponent },
  // { path: 'tasks', component: TasksComponent },
   //{ path: 'social', component: SocialComponent },
