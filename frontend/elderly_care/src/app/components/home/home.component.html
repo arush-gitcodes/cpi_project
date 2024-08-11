@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Public+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Galileo Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Public Sans", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#111418]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">Care Connect</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#111418] text-sm font-medium leading-normal" href="#">Services</a>
+              <a class="text-[#111418] text-sm font-medium leading-normal" href="#">About</a>
+              <a class="text-[#111418] text-sm font-medium leading-normal" href="#">Community</a>
+              <a class="text-[#111418] text-sm font-medium leading-normal" href="#">Resources</a>
+            </div>
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1980e6] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+              <span class="truncate">Sign In</span>
+            </button>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://cdn.usegalileo.ai/stability/2bcc9dff-dced-48df-bfe4-25e2c47a93bb.png");'
+            ></div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="@container">
+              <div class="@[480px]:p-4">
+                <div
+                  class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-start justify-end px-4 pb-10 @[480px]:px-10"
+                  style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://cdn.usegalileo.ai/sdxl10/151d4282-4854-4d92-8a87-7a0463f240bb.png");'
+                >
+                  <div class="flex flex-col gap-2 text-left">
+                    <h1
+                      class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
+                    >
+                      Hello, Mary!
+                    </h1>
+                    <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+                      Here's what's happening in your community
+                    </h2>
+                  </div>
+                  <button
+                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#1980e6] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
+                  >
+                    <span class="truncate">View more</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="p-4 @container">
+              <div class="flex flex-1 flex-col items-start justify-between gap-4 rounded-xl border border-[#dce0e5] bg-white p-5 @[480px]:flex-row @[480px]:items-center">
+                <div class="flex flex-col gap-1">
+                  <p class="text-[#111418] text-base font-bold leading-tight">Your next appointment is with Dr. Martin</p>
+                  <p class="text-[#637588] text-base font-normal leading-normal">Tuesday, March 22 at 12 PM</p>
+                </div>
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#1980e6] text-white text-sm font-medium leading-normal"
+                >
+                  <span class="truncate">Add to Calendar</span>
+                </button>
+              </div>
+            </div>
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                  style='background-image: url("https://cdn.usegalileo.ai/stability/20f56e03-013d-412e-9517-df77a965eb0a.png");'
+                ></div>
+                <div>
+                  <p class="text-[#111418] text-base font-medium leading-normal">Healthcare</p>
+                  <p class="text-[#637588] text-sm font-normal leading-normal">See upcoming appointments, request refills, and more</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                  style='background-image: url("https://cdn.usegalileo.ai/sdxl10/dfb87e9e-bb61-46ff-9319-c4d98794de57.png");'
+                ></div>
+                <div>
+                  <p class="text-[#111418] text-base font-medium leading-normal">Events</p>
+                  <p class="text-[#637588] text-sm font-normal leading-normal">Find fun and educational events near you</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                  style='background-image: url("https://cdn.usegalileo.ai/sdxl10/d26247f9-4168-472e-94c1-a837e306ff6d.png");'
+                ></div>
+                <div>
+                  <p class="text-[#111418] text-base font-medium leading-normal">Personal Assistance</p>
+                  <p class="text-[#637588] text-sm font-normal leading-normal">Get help with anything from grocery shopping to tech support</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                  style='background-image: url("https://cdn.usegalileo.ai/stability/fcd26b82-ae97-4258-8dcd-79d2c6c47107.png");'
+                ></div>
+                <div>
+                  <p class="text-[#111418] text-base font-medium leading-normal">Community</p>
+                  <p class="text-[#637588] text-sm font-normal leading-normal">Stay connected with neighbors and friends</p>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">What our members are saying</h2>
+            <div class="flex flex-col gap-8 overflow-x-hidden bg-white p-4">
+              <div class="flex flex-col gap-3 bg-white">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                    style='background-image: url("https://cdn.usegalileo.ai/stability/c0cae231-5f41-4c08-a647-7dac201ebadc.png");'
+                  ></div>
+                  <div class="flex-1">
+                    <p class="text-[#111418] text-base font-medium leading-normal">Evelyn M.</p>
+                    <p class="text-[#637588] text-sm font-normal leading-normal">March 15, 2022</p>
+                  </div>
+                </div>
+                <p class="text-[#111418] text-base font-normal leading-normal">
+                  "I've been using Care Connect for about a year now, and I can't say enough good things about it. The app is easy to use, and the service is top-notch. I've used
+                  it for everything from setting up appointments to finding local events."
+                </p>
+              </div>
+              <div class="flex flex-col gap-3 bg-white">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                    style='background-image: url("https://cdn.usegalileo.ai/stability/f7aa63fd-2e5b-41c5-aeee-b4490a5d635a.png");'
+                  ></div>
+                  <div class="flex-1">
+                    <p class="text-[#111418] text-base font-medium leading-normal">John P.</p>
+                    <p class="text-[#637588] text-sm font-normal leading-normal">March 10, 2022</p>
+                  </div>
+                </div>
+                <p class="text-[#111418] text-base font-normal leading-normal">
+                  "I'm so grateful for this service! It's made my life so much easier. They've helped me with everything from scheduling doctor's appointments to finding a
+                  handyman. The staff is always friendly and helpful, and they go above and beyond to make sure I'm taken care of."
+                </p>
+              </div>
+              <div class="flex flex-col gap-3 bg-white">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                    style='background-image: url("https://cdn.usegalileo.ai/sdxl10/ae0dbea2-de64-4f7b-a71d-8c09e7d1bbd6.png");'
+                  ></div>
+                  <div class="flex-1">
+                    <p class="text-[#111418] text-base font-medium leading-normal">Dorothy T.</p>
+                    <p class="text-[#637588] text-sm font-normal leading-normal">February 25, 2022</p>
+                  </div>
+                </div>
+                <p class="text-[#111418] text-base font-normal leading-normal">
+                  "Care Connect has been a lifesaver for me. I'm not as mobile as I used to be, and it can be hard to find reliable help when I need it. This service has made it so
+                  much easier to get the assistance I need. The app is user-friendly, and the customer service is excellent. I highly recommend it to anyone who needs a little
+                  extra help."
+                </p>
+              </div>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <textarea
+                  placeholder="How can we help you today?"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] focus:outline-0 focus:ring-0 border-none bg-[#f0f2f4] focus:border-none min-h-36 placeholder:text-[#637588] p-4 text-base font-normal leading-normal"
+                ></textarea>
+              </label>
+            </div>
+            <div class="flex px-4 py-3 justify-end">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-[#1980e6] text-white text-base font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

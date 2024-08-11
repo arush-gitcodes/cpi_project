@@ -1,36 +1,43 @@
 <!-- login-register.component.html -->
 <div class="container">
-    <div class="card">
-      <div class="card-header">
-        <h2>{{ isLoginMode ? 'Login' : 'Register' }}</h2>
-      </div>
-      <div class="card-body">
-        <form [formGroup]="isLoginMode ? loginForm : registrationForm" (ngSubmit)="isLoginMode ? onLogin() : onRegister()">
-          <div class="form-group" *ngIf="!isLoginMode">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" formControlName="firstName">
-          </div>
-          <div class="form-group" *ngIf="!isLoginMode">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" formControlName="lastName">
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" formControlName="email">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" formControlName="password">
-          </div>
-          <div class="form-group" *ngIf="!isLoginMode">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
-          </div>
-          <button type="submit" class="btn btn-primary">{{ isLoginMode ? 'Login' : 'Register' }}</button>
-        </form>
-      </div>
-      <div class="card-footer">
-        <a href="#" (click)="toggleMode()">{{ isLoginMode ? 'Register' : 'Login' }} instead</a>
-      </div>
+  <h1>Elderly Care Support System</h1>
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="isLoginMode ? loginForm : registrationForm" (ngSubmit)="isLoginMode ? onLogin() : onRegister()" [ngClass]="{'login-form': isLoginMode, 'registration-form': !isLoginMode}">
+        <div class="form-group" *ngIf="!isLoginMode">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Enter your first name">
+        </div>
+        <div class="form-group" *ngIf="!isLoginMode">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Enter your last name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter your password">
+        </div>
+        <div class="form-group" *ngIf="!isLoginMode">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your password">
+        </div>
+        <div class="form-group" *ngIf="!isLoginMode">
+          <label for="role">Role</label>
+          <select class="form-control" id="role" formControlName="role">
+            <option value="">Select a role</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary login-button">{{ isLoginMode ? 'Login' : 'Register' }}</button>
+      </form>
+    </div>
+    <div class="card-footer">
+      <a href="#" (click)="toggleMode()">{{ isLoginMode ? 'Register' : 'Login' }} instead</a>
+      <a href="#" *ngIf="isLoginMode" class="forgot-password">Forgot your password? Reset it</a>
     </div>
   </div>
+</div>

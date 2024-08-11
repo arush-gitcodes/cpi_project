@@ -1,21 +1,18 @@
-// login-register.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
+import { gsap } from 'gsap';
+import { Power2 } from 'gsap/all';
 
 @Component({
   selector: 'app-login',
-  standalone:true,
-  imports:[CommonModule,FormsModule,ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-
-
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   registrationForm: FormGroup;
   isLoginMode = true;
@@ -41,8 +38,51 @@ export class LoginComponent {
     });
   }
 
+  ngOnInit() {
+    this.animateForm();
+  }
+
+  animateForm() {
+    gsap.from('.card', {
+      duration: 0.8,
+      y: 50,
+      opacity: 0,
+      ease: Power2.easeOut,
+      delay: 0.2
+    });
+
+    gsap.from('.login-button', {
+      duration: 0.8,
+      y: 50,
+      opacity: 0,
+      ease: Power2.easeOut,
+      delay: 0.4
+    });
+  }
+
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;
+    this.animateFormSwitch();
+  }
+
+  animateFormSwitch() {
+    const currentForm = this.isLoginMode ? '.login-form' : '.registration-form';
+    const otherForm = this.isLoginMode ? '.registration-form' : '.login-form';
+
+    gsap.to(otherForm, {
+      duration: 0.3,
+      opacity: 0,
+      y: 20,
+      ease: Power2.easeIn,
+      onComplete: () => {
+        gsap.to(currentForm, {
+          duration: 0.3,
+          opacity: 1,
+          y: 0,
+          ease: Power2.easeOut
+        });
+      }
+    });
   }
 
   onLogin() {
