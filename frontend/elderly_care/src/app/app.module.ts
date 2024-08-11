@@ -8,7 +8,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
-
+import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DailyCheckinComponent } from './components/daily-checkin/daily-checkin.component';
 
 
 
@@ -17,7 +19,8 @@ import { AuthService } from './services/auth.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule,LoginComponent,AppComponent
+    ReactiveFormsModule,LoginComponent,AppComponent,AppRoutingModule,
+    DailyCheckinComponent,DashboardComponent
   ],
   providers: [
     AuthService,provideHttpClient(withFetch())

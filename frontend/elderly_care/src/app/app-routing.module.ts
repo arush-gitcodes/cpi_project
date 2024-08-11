@@ -1,10 +1,12 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { LoginComponent } from './login/login.component';
 import { DailyCheckinComponent } from './components/daily-checkin/daily-checkin.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
-
-export const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
   //{ path: 'profile', component: ProfileComponent },
@@ -15,3 +17,9 @@ export const routes: Routes = [
 //  { path: 'health', component: HealthComponent },
   { path: '**', redirectTo: '/home' } // Redirect to dashboard for any unknown routes
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
