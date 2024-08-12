@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from . import models
-
+from fastapi.middleware.cors import CORSMiddleware
 from . import crud
 from . import schemas
 from .database import engine, get_db
@@ -11,6 +11,17 @@ from typing import List
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# Add this after creating the app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],  # Update this with your Angular app's URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 # ElderlyUser endpoints
 @app.post("/elderly_users/", response_model=schemas.ElderlyUser)
