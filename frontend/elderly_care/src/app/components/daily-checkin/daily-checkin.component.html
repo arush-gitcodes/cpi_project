@@ -1,121 +1,73 @@
-<div class="layout-container flex h-full grow flex-col">
-    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f1f4f0] px-10 py-3">
-      <!-- Header content -->
-      <div class="flex items-center gap-4 text-[#131811]">
-        <div class="size-4">
-          <!-- SVG logo -->
-        </div>
-        <h2 class="text-[#131811] text-lg font-bold leading-tight tracking-[-0.015em]">HealthCheck</h2>
+<!-- health-check.component.html -->
+
+<div class="layout-container">
+  <!-- Activity Check -->
+  <section class="content-section">
+    <h2 class="section-title">How active were you today?</h2>
+    <p class="section-description">
+      We want to know how active you are every day. This will help us understand your health and provide you with better recommendations.
+    </p>
+
+    <div class="activity-item">
+      <div class="activity-content">
+        <p class="activity-label">Step count</p>
+        <p class="activity-question">Did you take a walk today?</p>
+        <p class="activity-description">This could be a stroll around the neighborhood, a walk in the park, or a hike on a trail.</p>
+        <button
+          (click)="updateWalkStatus(true)"
+          [class.active]="tookWalk"
+          class="activity-button"
+        >
+          Yes
+        </button>
       </div>
-      <!-- Navigation items -->
-      <!-- User profile -->
-    </header>
-  
-    <div class="px-40 flex flex-1 justify-center py-5">
-      <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-        <h2 class="text-[#131811] tracking-light text-[28px] font-bold leading-tight px-4 text-left pb-3 pt-5">How active were you today?</h2>
-        <p class="text-[#131811] text-base font-normal leading-normal pb-3 pt-1 px-4">
-          We want to know how active you are every day. This will help us understand your health and provide you with better recommendations.
-        </p>
-  
-        <div class="p-4">
-          <div class="flex items-stretch justify-between gap-4 rounded-xl">
-            <div class="flex flex-[2_2_0px] flex-col gap-4">
-              <div class="flex flex-col gap-1">
-                <p class="text-[#6b8961] text-sm font-normal leading-normal">Step count</p>
-                <p class="text-[#131811] text-base font-bold leading-tight">Did you take a walk today?</p>
-                <p class="text-[#6b8961] text-sm font-normal leading-normal">This could be a stroll around the neighborhood, a walk in the park, or a hike on a trail.</p>
-              </div>
-              <button
-                (click)="updateWalkStatus(true)"
-                [class.bg-[#3ed411]]="tookWalk"
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 flex-row-reverse bg-[#f1f4f0] text-[#131811] text-sm font-medium leading-normal w-fit"
-              >
-                <span class="truncate">Yes</span>
-              </button>
-            </div>
-            <div
-              class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex-1"
-              style="background-image: url('https://cdn.usegalileo.ai/stability/01085c26-4f6e-4f2c-a588-8680a70bc671.png');"
-            ></div>
-          </div>
-        </div>
-  
-        <div class="p-4">
-          <div class="flex items-stretch justify-between gap-4 rounded-xl">
-            <div class="flex flex-[2_2_0px] flex-col gap-4">
-              <div class="flex flex-col gap-1">
-                <p class="text-[#131811] text-base font-bold leading-tight">Did you do any physical activity today?</p>
-                <p class="text-[#6b8961] text-sm font-normal leading-normal">This could be yoga, stretching, strength training, or any other form of physical activity.</p>
-              </div>
-              <button
-                (click)="updatePhysicalActivityStatus(true)"
-                [class.bg-[#3ed411]]="didPhysicalActivity"
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 flex-row-reverse bg-[#f1f4f0] text-[#131811] text-sm font-medium leading-normal w-fit"
-              >
-                <span class="truncate">Yes</span>
-              </button>
-            </div>
-            <div
-              class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex-1"
-              style="background-image: url('https://cdn.usegalileo.ai/stability/4849bc27-9cbf-4035-9015-5bf6b0709bde.png');"
-            ></div>
-          </div>
-        </div>
-  
-        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-          <label class="flex flex-col min-w-40 flex-1">
-            <p class="text-[#131811] text-base font-medium leading-normal pb-2">Pedometer steps (optional)</p>
-            <input
-              [(ngModel)]="stepCount"
-              placeholder="0"
-              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#131811] focus:outline-0 focus:ring-0 border border-[#dee6db] bg-white focus:border-[#dee6db] h-14 placeholder:text-[#6b8961] p-[15px] text-base font-normal leading-normal"
-            />
-          </label>
-          <label class="flex flex-col min-w-40 flex-1">
-            <p class="text-[#131811] text-base font-medium leading-normal pb-2">Duration (optional)</p>
-            <input
-              [(ngModel)]="activityDuration"
-              placeholder="0"
-              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#131811] focus:outline-0 focus:ring-0 border border-[#dee6db] bg-white focus:border-[#dee6db] h-14 placeholder:text-[#6b8961] p-[15px] text-base font-normal leading-normal"
-            />
-          </label>
-        </div>
-  
-        <div class="flex justify-stretch">
-          <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-end">
-            <button
-              (click)="skipCheckIn()"
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-transparent text-[#131811] text-sm font-bold leading-normal tracking-[0.015em]"
-            >
-              <span class="truncate">Skip for now</span>
-            </button>
-            <button
-              (click)="submitCheckIn()"
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#3ed411] text-[#131811] text-sm font-bold leading-normal tracking-[0.015em]"
-            >
-              <span class="truncate">Submit</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <div class="activity-image" style="background-image: url('https://cdn.usegalileo.ai/stability/01085c26-4f6e-4f2c-a588-8680a70bc671.png');"></div>
     </div>
-  </div>
-  <br><hr>
-  <div class="mood-check-container">
-    <header>
-      <h1>How are you feeling?</h1>
-      <span class="done-button">Done</span>
-    </header>
-    
-    <h2>Select your mood</h2>
+
+    <div class="activity-item">
+      <div class="activity-content">
+        <p class="activity-question">Did you do any physical activity today?</p>
+        <p class="activity-description">This could be yoga, stretching, strength training, or any other form of physical activity.</p>
+        <button
+          (click)="updatePhysicalActivityStatus(true)"
+          [class.active]="didPhysicalActivity"
+          class="activity-button"
+        >
+          Yes
+        </button>
+      </div>
+      <div class="activity-image" style="background-image: url('https://cdn.usegalileo.ai/stability/4849bc27-9cbf-4035-9015-5bf6b0709bde.png');"></div>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">
+        <span>Pedometer steps (optional)</span>
+        <input [(ngModel)]="stepCount" type="number" placeholder="0" class="input-field">
+      </label>
+      <label class="input-label">
+        <span>Duration (optional)</span>
+        <input [(ngModel)]="activityDuration" type="number" placeholder="0" class="input-field">
+      </label>
+    </div>
+
+    <div class="button-group">
+      <button (click)="skipCheckIn()" class="secondary-button">Skip for now</button>
+      <button (click)="submitCheckIn()" class="primary-button">Submit</button>
+    </div>
+  </section>
+
+  <!-- Mood Check -->
+  <section class="content-section mood-check">
+    <h2 class="section-title">How are you feeling?</h2>
+    <h3 class="subsection-title">Select your mood</h3>
     
     <div class="mood-options">
       <button *ngFor="let mood of moodOptions" 
               (click)="selectMood(mood.value)"
-              [class.selected]="selectedMood === mood.value">
+              [class.selected]="selectedMood === mood.value"
+              class="mood-button">
         <span class="mood-icon">{{ mood.icon }}</span>
-        <span class="mood-value">{{ mood.label }}</span>
+        <span class="mood-label">{{ mood.label }}</span>
       </button>
     </div>
     
@@ -125,271 +77,142 @@
         {{ feeling }}
       </button>
     </div>
-  </div>
-  <!--Sleep Tracker-->
-  <div class="layout-container flex h-full grow flex-col">
-    <div class="px-40 flex flex-1 justify-center py-5">
-      <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-        <div class="flex flex-wrap justify-between gap-3 p-4">
-          <div class="flex min-w-72 flex-col gap-3">
-            <p class="text-[#181811] tracking-light text-[32px] font-bold leading-tight">How was your sleep?</p>
-            <p class="text-[#8c875f] text-sm font-normal leading-normal">Tell us about your last night's sleep</p>
-          </div>
-        </div>
-        <div *ngFor="let quality of ['Great', 'Good', 'Okay', 'Poor']" class="flex px-4 py-3">
-          <button
-            (click)="setSleepQuality(quality)"
-            [class.bg-[#fbea51]]="sleepQuality === quality"
-            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 flex-1 bg-[#f5f4f0] text-[#181811] text-sm font-bold leading-normal tracking-[0.015em]"
-          >
-            <span class="truncate">{{quality}}</span>
-          </button>
-        </div>
-        <h3 class="text-[#181811] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Common issues</h3>
-        <div class="px-4">
-          <label *ngFor="let issue of ['snoring', 'legCramps', 'restlessLegs', 'nightSweats']" class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              [checked]="commonIssues[issue]"
-              (change)="toggleIssue(issue)"
-              class="h-5 w-5 rounded border-[#e6e5db] border-2 bg-transparent text-[#fbea51] checked:bg-[#fbea51] checked:border-[#fbea51] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#e6e5db] focus:outline-none"
-            />
-            <p class="text-[#181811] text-base font-normal leading-normal">{{issue | titlecase}}</p>
-          </label>
-        </div>
-        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-          <label class="flex flex-col min-w-40 flex-1">
-            <textarea
-              [(ngModel)]="notes"
-              placeholder="Add notes"
-              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#181811] focus:outline-0 focus:ring-0 border border-[#e6e5db] bg-white focus:border-[#e6e5db] min-h-36 placeholder:text-[#8c875f] p-[15px] text-base font-normal leading-normal"
-            ></textarea>
-          </label>
-        </div>
-        <div class="flex justify-stretch">
-          <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-end">
-            <button
-              (click)="cancelTracking()"
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f5f4f0] text-[#181811] text-sm font-bold leading-normal tracking-[0.015em]"
-            >
-              <span class="truncate">Cancel</span>
-            </button>
-            <button
-              (click)="saveTracking()"
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#fbea51] text-[#181811] text-sm font-bold leading-normal tracking-[0.015em]"
-            >
-              <span class="truncate">Save</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--meals-->
-  <div class="layout-container flex h-full grow flex-col">
-    <div class="px-40 flex flex-1 justify-center py-5">
-      <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-        <div class="flex flex-wrap justify-between gap-3 p-4">
-          <p class="text-[#1c190d] tracking-light text-[32px] font-bold leading-tight min-w-72">Log a Meal</p>
-        </div>
-        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-          <label class="flex flex-col min-w-40 flex-1">
-            <p class="text-[#1c190d] text-base font-medium leading-normal pb-2">Meal type</p>
-            <select
-              [(ngModel)]="selectedMeal"
-              class="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1c190d] focus:outline-0 focus:ring-0 border border-[#e8e4ce] bg-[#fcfbf8] focus:border-[#e8e4ce] h-14 p-[15px] text-base font-normal leading-normal"
-            >
-              <option value="" disabled selected>Select a meal type</option>
-              <option *ngFor="let mealType of mealTypes" [value]="mealType">{{mealType}}</option>
-            </select>
-          </label>
-        </div>
-        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-          <label class="flex flex-col min-w-40 flex-1">
-            <p class="text-[#1c190d] text-base font-medium leading-normal pb-2">Description</p>
-            <textarea
-              [(ngModel)]="description"
-              placeholder="E.g. 2 scrambled eggs, 1 slice of whole grain bread, 1/2 cup of fresh fruit"
-              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1c190d] focus:outline-0 focus:ring-0 border border-[#e8e4ce] bg-[#fcfbf8] focus:border-[#e8e4ce] min-h-36 placeholder:text-[#9c8e49] p-[15px] text-base font-normal leading-normal"
-            ></textarea>
-          </label>
-        </div>
-        <div class="px-4">
-          <label class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              [(ngModel)]="enjoyedMeal"
-              class="h-5 w-5 rounded border-[#e8e4ce] border-2 bg-transparent text-[#f4d225] checked:bg-[#f4d225] checked:border-[#f4d225] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#e8e4ce] focus:outline-none"
-            />
-            <p class="text-[#1c190d] text-base font-normal leading-normal">I enjoyed this meal</p>
-          </label>
-          <label class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              [(ngModel)]="goodAppetite"
-              class="h-5 w-5 rounded border-[#e8e4ce] border-2 bg-transparent text-[#f4d225] checked:bg-[#f4d225] checked:border-[#f4d225] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#e8e4ce] focus:outline-none"
-            />
-            <p class="text-[#1c190d] text-base font-normal leading-normal">I had a good appetite</p>
-          </label>
-          <label class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              [(ngModel)]="enoughFluids"
-              class="h-5 w-5 rounded border-[#e8e4ce] border-2 bg-transparent text-[#f4d225] checked:bg-[#f4d225] checked:border-[#f4d225] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#e8e4ce] focus:outline-none"
-            />
-            <p class="text-[#1c190d] text-base font-normal leading-normal">I drank enough fluids today</p>
-          </label>
-        </div>
-        <div class="flex px-4 py-3 justify-end">
-          <button
-            (click)="logMeal()"
-            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4d225] text-[#1c190d] text-sm font-bold leading-normal tracking-[0.015em]"
-          >
-            <span class="truncate">Log Meal</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--pain assesment-->
-  <div class="relative flex size-full min-h-screen flex-col bg-[#fcfbf8] group/design-root overflow-x-hidden" style="font-family: Epilogue, 'Noto Sans', sans-serif;">
-    <div class="layout-container flex h-full grow flex-col">
-      <div class="px-40 flex flex-1 justify-center py-5">
-        <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-          <div class="flex flex-wrap justify-between gap-3 p-4">
-            <div class="flex min-w-72 flex-col gap-3">
-              <p class="text-[#1c190d] tracking-light text-[32px] font-bold leading-tight">Track your pain</p>
-              <p class="text-[#9c8e49] text-sm font-normal leading-normal">Rate your pain on a scale of 0 to 10</p>
-            </div>
-          </div>
-          <div class="flex gap-3 p-3 flex-wrap pr-4">
-            <button *ngFor="let area of painAreas" 
-                    (click)="togglePainArea(area)"
-                    [class.bg-[#f4d225]]="selectedPainAreas.includes(area)"
-                    class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#f4f1e7] pl-4 pr-4">
-              <p class="text-[#1c190d] text-sm font-medium leading-normal">{{ area }}</p>
-            </button>
-          </div>
-          <p class="text-[#1c190d] text-base font-normal leading-normal pb-3 pt-1 px-4">
-            Please select where you feel pain on the body map. If you feel pain in multiple areas, please select all that apply.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
 
-  <!--Medication-->
-  <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-    <h1 class="text-3xl font-bold mb-6">Medication Adherence Tracker</h1>
-  
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-3">Morning</h2>
-      <div class="flex items-center justify-between mb-2 bg-[#faf9f6] p-3 rounded-lg">
-        <div class="flex items-center">
-          <span class="mr-3 bg-[#f4f1e7] p-2 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.5 20.5 3 13l18-18 3.5 3.5-13 13"/>
-            </svg>
+  <!-- Sleep Tracker -->
+  <section class="content-section">
+    <h2 class="section-title">How was your sleep?</h2>
+    <p class="section-description">Tell us about your last night's sleep</p>
+
+    <div class="sleep-quality-buttons">
+      <button *ngFor="let quality of ['Great', 'Good', 'Okay', 'Poor']"
+              (click)="setSleepQuality(quality)"
+              [class.active]="sleepQuality === quality"
+              class="sleep-quality-button">
+        {{quality}}
+      </button>
+    </div>
+
+    <h3 class="subsection-title">Common issues</h3>
+    <div class="common-issues">
+      <label *ngFor="let issue of ['snoring', 'legCramps', 'restlessLegs', 'nightSweats']" class="issue-checkbox">
+        <input
+          type="checkbox"
+          [checked]="commonIssues[issue]"
+          (change)="toggleIssue(issue)"
+        >
+        <span>{{issue | titlecase}}</span>
+      </label>
+    </div>
+
+    <textarea
+      [(ngModel)]="notes"
+      placeholder="Add notes"
+      class="notes-textarea"
+    ></textarea>
+
+    <div class="button-group">
+      <button (click)="cancelTracking()" class="secondary-button">Cancel</button>
+      <button (click)="saveTracking()" class="primary-button">Save</button>
+    </div>
+  </section>
+
+  <!-- Meal Logger -->
+  <section class="content-section">
+    <h2 class="section-title">Log a Meal</h2>
+
+    <div class="input-group">
+      <label class="input-label">
+        <span>Meal type</span>
+        <select [(ngModel)]="selectedMeal" class="input-field">
+          <option value="" disabled selected>Select a meal type</option>
+          <option *ngFor="let mealType of mealTypes" [value]="mealType">{{mealType}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">
+        <span>Description</span>
+        <textarea
+          [(ngModel)]="description"
+          placeholder="E.g. 2 scrambled eggs, 1 slice of whole grain bread, 1/2 cup of fresh fruit"
+          class="input-field description-textarea"
+        ></textarea>
+      </label>
+    </div>
+
+    <div class="checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="enjoyedMeal">
+        <span>I enjoyed this meal</span>
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="goodAppetite">
+        <span>I had a good appetite</span>
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="enoughFluids">
+        <span>I drank enough fluids today</span>
+      </label>
+    </div>
+
+    <button (click)="logMeal()" class="primary-button">Log Meal</button>
+  </section>
+
+  <!-- Pain Assessment -->
+  <section class="content-section">
+    <h2 class="section-title">Track your pain</h2>
+    <p class="section-description">Rate your pain on a scale of 0 to 10</p>
+
+    <div class="pain-areas">
+      <button *ngFor="let area of painAreas" 
+              (click)="togglePainArea(area)"
+              [class.active]="selectedPainAreas.includes(area)"
+              class="pain-area-button">
+        {{ area }}
+      </button>
+    </div>
+
+    <p class="section-description">
+      Please select where you feel pain on the body map. If you feel pain in multiple areas, please select all that apply.
+    </p>
+  </section>
+
+  <!-- Medication Tracker -->
+  <section class="content-section medication-tracker">
+    <h2 class="section-title">Medication Adherence Tracker</h2>
+
+    <div class="medication-group">
+      <h3 class="subsection-title">Morning</h3>
+      <div class="medication-item">
+        <div class="medication-info">
+          <span class="medication-icon">
+            <!-- SVG icon here -->
           </span>
           <div>
-            <p class="font-medium">8:00 AM</p>
-            <p class="text-sm text-[#9c8e49]">Vitamin D 1000IU</p>
+            <p class="medication-time">8:00 AM</p>
+            <p class="medication-name">Vitamin D 1000IU</p>
           </div>
         </div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" class="sr-only peer">
-          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f4d225]"></div>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
         </label>
       </div>
-      <div class="flex items-center justify-between mb-2 bg-[#faf9f6] p-3 rounded-lg">
-        <div class="flex items-center">
-          <span class="mr-3 bg-[#f4f1e7] p-2 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.5 20.5 3 13l18-18 3.5 3.5-13 13"/>
-            </svg>
-          </span>
-          <div>
-            <p class="font-medium">8:00 AM</p>
-            <p class="text-sm text-[#9c8e49]">Lipitor 20mg</p>
-          </div>
-        </div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" class="sr-only peer">
-          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f4d225]"></div>
-        </label>
-      </div>
-    </section>
-  
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-3">Afternoon</h2>
-      <div class="flex items-center justify-between mb-2 bg-[#faf9f6] p-3 rounded-lg">
-        <div class="flex items-center">
-          <span class="mr-3 bg-[#f4f1e7] p-2 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.5 20.5 3 13l18-18 3.5 3.5-13 13"/>
-            </svg>
-          </span>
-          <div>
-            <p class="font-medium">2:00 PM</p>
-            <p class="text-sm text-[#9c8e49]">Aspirin 81mg</p>
-          </div>
-        </div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" class="sr-only peer">
-          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f4d225]"></div>
-        </label>
-      </div>
-    </section>
-  
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-3">Evening</h2>
-      <div class="flex items-center justify-between mb-2 bg-[#faf9f6] p-3 rounded-lg">
-        <div class="flex items-center">
-          <span class="mr-3 bg-[#f4f1e7] p-2 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.5 20.5 3 13l18-18 3.5 3.5-13 13"/>
-            </svg>
-          </span>
-          <div>
-            <p class="font-medium">8:00 PM</p>
-            <p class="text-sm text-[#9c8e49]">Metformin 1000mg</p>
-          </div>
-        </div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" class="sr-only peer">
-          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f4d225]"></div>
-        </label>
-      </div>
-      <div class="flex items-center justify-between mb-2 bg-[#faf9f6] p-3 rounded-lg">
-        <div class="flex items-center">
-          <span class="mr-3 bg-[#f4f1e7] p-2 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.5 20.5 3 13l18-18 3.5 3.5-13 13"/>
-            </svg>
-          </span>
-          <div>
-            <p class="font-medium">8:00 PM</p>
-            <p class="text-sm text-[#9c8e49]">Losartan 50mg</p>
-          </div>
-        </div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" class="sr-only peer">
-          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f4d225]"></div>
-        </label>
-      </div>
-    </section>
-  
-    <section>
-      <h2 class="text-xl font-semibold mb-3">Side Effects</h2>
+      <!-- Add more medication items as needed -->
+    </div>
+
+    <!-- Repeat for Afternoon and Evening medication groups -->
+
+    <div class="side-effects">
+      <h3 class="subsection-title">Side Effects</h3>
       <textarea
         placeholder="Enter any side effects experienced"
-        class="w-full p-3 bg-[#faf9f6] rounded-lg resize-none mb-4"
+        class="side-effects-textarea"
         rows="4"
       ></textarea>
-      <button
-        class="w-full bg-[#f4d225] text-black font-semibold py-2 px-4 rounded-lg hover:bg-[#e5c520]"
-      >
-        Submit
-      </button>
-    </section>
-  </div>
+      <button class="primary-button">Submit</button>
+    </div>
+  </section>
+</div>
