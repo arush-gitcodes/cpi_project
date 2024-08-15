@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, Float
 from sqlalchemy.orm import relationship
-from .database import Base
+from database import Base
 
 class ElderlyUser(Base):
     __tablename__ = "elderlyusers"
