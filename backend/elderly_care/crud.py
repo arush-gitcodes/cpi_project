@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
+import models
+import schemas
 
-from . import models
-from . import schemas
 from datetime import datetime
 
 # ElderlyUser CRUD operations
