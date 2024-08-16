@@ -1,6 +1,8 @@
 <header>
-    <img src="logo.png" alt="Elderly Care Support System">
+  <div class="header-content">
+    <img src="logo.png" alt="Elderly Care Support System" class="logo">
     <h1>Welcome, {{userName}}</h1>
-    <div class="date-time">{{currentDateTime }}</div>
-    <button class="emergency-btn" (click)="triggerEmergency()">Emergency</button>
-  </header>
+    <div class="date-time">{{currentDateTime}}</div>
+  </div>
+  <button class="emergency-btn" (click)="triggerEmergency()">Emergency</button>
+</header>

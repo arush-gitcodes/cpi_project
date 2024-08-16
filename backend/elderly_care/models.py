@@ -2,6 +2,14 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, F
 from sqlalchemy.orm import relationship
 from database import Base
 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    username = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+
 class ElderlyUser(Base):
     __tablename__ = "elderlyusers"
     __table_args__ = {"schema": "elderlycare"}
