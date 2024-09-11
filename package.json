@@ -23,8 +23,11 @@
     "@capacitor/angular": "^2.0.3",
     "@capacitor/core": "^6.1.2",
     "@capacitor/ios": "^6.1.2",
+    "@ionic/angular": "^8.3.0",
     "capacitor-audio": "^0.0.6",
     "gsap": "^3.12.5",
+    "ionic": "^5.4.16",
+    "ionicons": "^7.4.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

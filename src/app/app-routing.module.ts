@@ -8,8 +8,10 @@ import { HomeComponent } from './components/home/home.component';
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { AuthComponent } from './auth/auth.component';
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  {path:'auth',component:AuthComponent,data: { isAuth: true }},
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
   {path:'profile',component:UserProfileComponent},
