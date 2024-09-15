@@ -96,7 +96,7 @@
 
     <h3 class="subsection-title">Common issues</h3>
     <div class="common-issues">
-      <label *ngFor="let issue of ['snoring', 'legCramps', 'restlessLegs', 'nightSweats']" class="issue-checkbox">
+      <label *ngFor="let issue of getCommonIssuesKeys()" class="issue-checkbox">
         <input
           type="checkbox"
           [checked]="commonIssues[issue]"

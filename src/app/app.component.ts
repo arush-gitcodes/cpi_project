@@ -5,7 +5,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from "./components/home/home.component";
-import { DailyCheckinComponent } from './components/daily-checkin/daily-checkin.component';
+import { DailyCheckInComponent } from './components/daily-checkin/daily-checkin.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { filter } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { filter } from 'rxjs';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, LoginComponent, HeaderComponent, FooterComponent,
-     NavbarComponent, HomeComponent,DailyCheckinComponent,UserProfileComponent],
+     NavbarComponent, HomeComponent,DailyCheckInComponent,UserProfileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

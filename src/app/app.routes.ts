@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DailyCheckinComponent } from './components/daily-checkin/daily-checkin.component';
+import { DailyCheckInComponent } from './components/daily-checkin/daily-checkin.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppointmentComponent } from './components/appointment/appointment.component';
@@ -16,7 +16,7 @@ export const routes: Routes = [
   {path:'profile',component:UserProfileComponent},
   //{ path: 'profile', component: ProfileComponent },
  { path: 'medication-appointments', component: AppointmentComponent },
-  { path: 'daily-check-in', component: DailyCheckinComponent },
+  { path: 'daily-check-in', component: DailyCheckInComponent },
  { path: 'tasks', component: TaskListComponent },
   //{ path: 'social', component: SocialComponent },
 //  { path: 'health', component: HealthComponent },
