@@ -3,9 +3,11 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background-color: #f0f0f0;
+  background-color: #f8f9fa; /* Using the background color from the remote branch */
   width: 100%;
   box-sizing: border-box;
+  flex-wrap: wrap; /* Added from the remote branch */
+  justify-content: space-between; /* Keeping this for both versions */
 }
 
 .header-content {
@@ -14,6 +16,8 @@
   align-items: center;
   width: 100%;
   max-width: 1200px;
+  flex-wrap: wrap; /* Added from the remote branch */
+  gap: 15px; /* Added from the remote branch */
 }
 
 .logo {
@@ -31,6 +35,7 @@
 .date-time {
   font-size: 1rem;
   margin-bottom: 1rem;
+  color: #6c757d; /* Added from the remote branch */
 }
 
 .emergency-btn {
@@ -48,6 +53,7 @@
   background-color: #ff1a1a;
 }
 
+/* Media Query for larger screens */
 @media (min-width: 768px) {
   .header {
     flex-direction: row;
@@ -78,6 +84,7 @@
   }
 }
 
+/* Media Query for extra large screens */
 @media (min-width: 1024px) {
   .header {
     padding: 1.5rem;
@@ -98,5 +105,36 @@
   .emergency-btn {
     padding: 1rem 2rem;
     font-size: 1.2rem;
+  }
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-content {
+    margin-bottom: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .emergency-btn {
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    margin-bottom: 10px;
   }
 }
