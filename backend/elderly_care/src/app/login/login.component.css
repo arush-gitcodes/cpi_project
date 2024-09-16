@@ -1,0 +1,81 @@
+/* login-register.component.css */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+  }
+  
+  .card {
+    background-color: #2a2a2a;
+    border: none;
+    border-radius: 8px;
+  }
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #b0b0b0;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #3a3a3a;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+  }
+  
+  .form-control::placeholder {
+    color: #808080;
+  }
+  
+  .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  .card-footer {
+    background-color: transparent;
+    border-top: none;
+    padding: 1rem;
+  }
+  
+  .card-footer a {
+    color: #b0b0b0;
+    text-decoration: none;
+  }
+  
+  .forgot-password {
+    display: block;
+    margin-top: 0.5rem;
+  }

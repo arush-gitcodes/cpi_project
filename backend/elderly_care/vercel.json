@@ -1,10 +1,16 @@
 {
     "version": 2,
     "builds": [
-      { "src": "backend/elderly_care/main.py", "use": "@vercel/python" }
+      {
+        "src": "backend/elderly_care/main.py",
+        "use": "@vercel/python"
+      }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "backend/elderly_care/main.py" }
+      {
+        "src": "/(.*)",
+        "dest": "backend/elderly_care/main.py"
+      }
     ],
     "ignore": ["frontend/elderly_care/**"]
   }

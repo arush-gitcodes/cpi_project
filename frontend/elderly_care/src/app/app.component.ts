@@ -8,13 +8,14 @@ import { HomeComponent } from "./components/home/home.component";
 import { DailyCheckInComponent } from './components/daily-checkin/daily-checkin.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { filter } from 'rxjs';
+import { EventsComponent } from './components/events/events.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, LoginComponent, HeaderComponent, FooterComponent,
-     NavbarComponent, HomeComponent,DailyCheckInComponent,UserProfileComponent],
+     NavbarComponent, HomeComponent,DailyCheckInComponent,UserProfileComponent,EventsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
