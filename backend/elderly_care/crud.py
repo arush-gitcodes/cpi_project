@@ -1,9 +1,32 @@
 from sqlalchemy.orm import Session
 import models
 import schemas
-
+from passlib.context import CryptContext
 from datetime import datetime
 
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def get_user_by_email(db: Session, email: str):
+    return db.query(models.User).filter(models.User.email == email).first()
+
+def get_user_by_username(db: Session, username: str):
+    return db.query(models.User).filter(models.User.username == username).first()
+
+def create_user(db: Session, user: schemas.UserCreate):
+    hashed_password = pwd_context.hash(user.password)
+    db_user = models.User(email=user.email, hashed_password=hashed_password, username=user.username)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+def authenticate_user(db: Session, username: str, password: str):
+    user = get_user_by_username(db, username)
+    if not user:
+        return False
+    if not pwd_context.verify(password, user.hashed_password):
+        return False
+    return user
 # ElderlyUser CRUD operations
 def create_elderly_user(db: Session, user: schemas.ElderlyUserCreate):
     db_user = models.ElderlyUser(**user.dict())
@@ -145,3 +168,65 @@ def delete_emergency_alert(db: Session, alert_id: int):
     return db_alert
 
 # Implement similar CRUD operations for Message, Volunteer, Task, HealthMetric, Alert, and Admin models
+
+
+def create_checkin(db: Session, checkin_data: schemas.DailyCheckInRequest):
+    checkin = models.DailyCheckIn(
+        took_walk=checkin_data.activity_tracking.took_walk,
+        did_physical_activity=checkin_data.activity_tracking.did_physical_activity,
+        step_count=checkin_data.activity_tracking.step_count,
+        activity_duration=checkin_data.activity_tracking.activity_duration,
+        selected_mood=checkin_data.mood_tracking.selected_mood,
+        feelings=checkin_data.mood_tracking.feelings,
+        sleep_quality=checkin_data.sleep_tracking.sleep_quality,
+        common_issues=checkin_data.sleep_tracking.common_issues,
+        notes=checkin_data.sleep_tracking.notes,
+        meal_type=checkin_data.meal_logging.meal_type,
+        meal_description=checkin_data.meal_logging.meal_description,
+        enjoyed_meal=checkin_data.meal_logging.enjoyed_meal,
+        good_appetite=checkin_data.meal_logging.good_appetite,
+        enough_fluids=checkin_data.meal_logging.enough_fluids,
+        pain_areas=checkin_data.pain_tracking.pain_areas
+    )
+    db.add(checkin)
+    db.commit()
+    db.refresh(checkin)
+    return checkin
+
+def get_checkins(db: Session):
+    return db.query(models.DailyCheckIn).all()
+
+def get_checkin_by_id(db: Session, checkin_id: int):
+    return db.query(models.DailyCheckIn).filter(models.DailyCheckIn.id == checkin_id).first()
+
+def update_checkin(db: Session, checkin_id: int, checkin_data: schemas.DailyCheckInRequest):
+    checkin = db.query(models.DailyCheckIn).filter(models.DailyCheckIn.id == checkin_id).first()
+    
+    if checkin:
+        checkin.took_walk = checkin_data.activity_tracking.took_walk
+        checkin.did_physical_activity = checkin_data.activity_tracking.did_physical_activity
+        checkin.step_count = checkin_data.activity_tracking.step_count
+        checkin.activity_duration = checkin_data.activity_tracking.activity_duration
+        checkin.selected_mood = checkin_data.mood_tracking.selected_mood
+        checkin.feelings = checkin_data.mood_tracking.feelings
+        checkin.sleep_quality = checkin_data.sleep_tracking.sleep_quality
+        checkin.common_issues = checkin_data.sleep_tracking.common_issues
+        checkin.notes = checkin_data.sleep_tracking.notes
+        checkin.meal_type = checkin_data.meal_logging.meal_type
+        checkin.meal_description = checkin_data.meal_logging.meal_description
+        checkin.enjoyed_meal = checkin_data.meal_logging.enjoyed_meal
+        checkin.good_appetite = checkin_data.meal_logging.good_appetite
+        checkin.enough_fluids = checkin_data.meal_logging.enough_fluids
+        checkin.pain_areas = checkin_data.pain_tracking.pain_areas
+        
+        db.commit()
+        db.refresh(checkin)
+        
+    return checkin
+
+def delete_checkin(db: Session, checkin_id: int):
+    checkin = db.query(models.DailyCheckIn).filter(models.DailyCheckIn.id == checkin_id).first()
+    if checkin:
+        db.delete(checkin)
+        db.commit()
+    return checkin

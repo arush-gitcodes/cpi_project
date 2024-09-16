@@ -1,87 +1,42 @@
-// auth.service.ts
+// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-
-interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: 'elderly' | 'caregiver';
-  token: string;
-}
+import { Observable } from 'rxjs';
+import { User,UserCreate } from '../model/user.model';
+import { Token } from '../model/user.model'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<User | null>;
-  public currentUser: Observable<User | null>;
+  private apiUrl = 'http://localhost:8000';  // Replace with your FastAPI backend URL
 
-  constructor(private http: HttpClient, private router: Router) {
-    const storedUser = localStorage.getItem('currentUser');
-    this.currentUserSubject = new BehaviorSubject<User | null>(
-      storedUser ? JSON.parse(storedUser) : null
-    );
-    this.currentUser = this.currentUserSubject.asObservable();
+  constructor(private http: HttpClient) { }
+
+  register(user: UserCreate): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/register`, user);
   }
 
-  public get currentUserValue(): User | null {
-    return this.currentUserSubject.value;
+  login(username: string, password: string): Observable<Token> {
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    return this.http.post<Token>(`${this.apiUrl}/token`, formData);
   }
 
-  login(email: string, password: string) {
-    this.http.post<any>('/api/login', { email, password })
-      .subscribe(
-        (response) => {
-          const user: User = {
-            id: response.id,
-            firstName: response.firstName,
-            lastName: response.lastName,
-            email: response.email,
-            role: response.role,
-            token: response.token
-          };
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          console.error('Login error:', error);
-          // Handle login error
-        }
-      );
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
   }
 
-  register(firstName: string, lastName: string, email: string, password: string, role: 'elderly' | 'caregiver') {
-    this.http.post<any>('/api/register', { firstName, lastName, email, password, role })
-      .subscribe(
-        (response) => {
-          const user: User = {
-            id: response.id,
-            firstName: response.firstName,
-            lastName: response.lastName,
-            email: response.email,
-            role: response.role,
-            token: response.token
-          };
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          console.error('Registration error:', error);
-          // Handle registration error
-        }
-      );
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
-  logout() {
-    // Remove user from local storage and update the currentUser subject
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-    this.router.navigate(['/login']);
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
   }
 }

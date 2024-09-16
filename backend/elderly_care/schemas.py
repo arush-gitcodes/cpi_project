@@ -1,6 +1,18 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, ConfigDict
+
+from typing import Optional,List
 from datetime import datetime
+
+class UserBase(BaseModel):
+    email: str
+    username: str
+
+class UserCreate(UserBase):
+    password: str
+
+class User(UserBase):
+    id: int
+    model_config = ConfigDict(from_attributes=True)
 
 class ElderlyUserBase(BaseModel):
     name: str
@@ -18,9 +30,8 @@ class ElderlyUserCreate(ElderlyUserBase):
 
 class ElderlyUser(ElderlyUserBase):
     userID: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
 
 class CaregiverFamilyMemberBase(BaseModel):
     elderlyUserID: int
@@ -34,9 +45,8 @@ class CaregiverFamilyMemberCreate(CaregiverFamilyMemberBase):
 
 class CaregiverFamilyMember(CaregiverFamilyMemberBase):
     userID: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
 
 class ReminderBase(BaseModel):
     userID: int
@@ -51,9 +61,8 @@ class ReminderCreate(ReminderBase):
 
 class Reminder(ReminderBase):
     reminderID: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
 
 class CheckInBase(BaseModel):
     userID: int
@@ -67,9 +76,7 @@ class CheckInCreate(CheckInBase):
 
 class CheckIn(CheckInBase):
     checkInID: int
-
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class EmergencyAlertBase(BaseModel):
     userID: int
@@ -82,9 +89,8 @@ class EmergencyAlertCreate(EmergencyAlertBase):
 
 class EmergencyAlert(EmergencyAlertBase):
     alertID: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
 
 class MessageBase(BaseModel):
     senderID: int
@@ -97,9 +103,8 @@ class MessageCreate(MessageBase):
 
 class Message(MessageBase):
     messageID: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
 
 class VolunteerBase(BaseModel):
     name: str
@@ -111,9 +116,8 @@ class VolunteerCreate(VolunteerBase):
 
 class Volunteer(VolunteerBase):
     volunteerID: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
 
 class TaskBase(BaseModel):
     userID: int
@@ -127,9 +131,8 @@ class TaskCreate(TaskBase):
 
 class Task(TaskBase):
     taskID: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
 
 class HealthMetricBase(BaseModel):
     userID: int
@@ -143,9 +146,8 @@ class HealthMetricCreate(HealthMetricBase):
 
 class HealthMetric(HealthMetricBase):
     metricID: int
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        orm_mode = True
 
 class AlertBase(BaseModel):
     userID: int
@@ -158,8 +160,8 @@ class AlertCreate(AlertBase):
 
 class Alert(AlertBase):
     alertID: int
-
-    class Config:
+    model_config = ConfigDict(from_attributes=True)
+class Config:
         orm_mode = True
 
 class AdminBase(BaseModel):
@@ -172,6 +174,88 @@ class AdminCreate(AdminBase):
 
 class Admin(AdminBase):
     adminID: int
+    model_config = ConfigDict(from_attributes=True)
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
+
+class UserBase(BaseModel):
+    email: str
+    username: str
+
+class UserCreate(UserBase):
+    password: str
+
+class User(UserBase):
+    id: int
+    model_config = ConfigDict(from_attributes=True)
+
+# from pydantic import BaseModel
+
+# class ChatRequest(BaseModel):
+#     message: str
+
+# class ChatResponse(BaseModel):
+#     response: str
+class ChatRequest(BaseModel):
+    message: str
+
+class ChatResponse(BaseModel):
+    response: str
+    
+class ActivityTracking(BaseModel):
+    took_walk: bool
+    did_physical_activity: bool
+    step_count: Optional[int] = None
+    activity_duration: Optional[float] = None
+
+class MoodTracking(BaseModel):
+    selected_mood: Optional[str] = None
+    feelings: Optional[List[str]] = None
+
+class SleepTracking(BaseModel):
+    sleep_quality: Optional[str] = None
+    common_issues: Optional[List[str]] = None
+    notes: Optional[str] = None
+
+class MealLogging(BaseModel):
+    meal_type: Optional[str] = None
+    meal_description: Optional[str] = None
+    enjoyed_meal: bool = False
+    good_appetite: bool = False
+    enough_fluids: bool = False
+
+class PainTracking(BaseModel):
+    pain_areas: Optional[List[str]] = None
+
+class DailyCheckInRequest(BaseModel):
+    activity_tracking: ActivityTracking
+    mood_tracking: MoodTracking
+    sleep_tracking: SleepTracking
+    meal_logging: MealLogging
+    pain_tracking: PainTracking
+
+class DailyCheckInResponse(BaseModel):
+    id: int
+    took_walk: bool
+    did_physical_activity: bool
+    step_count: Optional[int]
+    activity_duration: Optional[float]
+    selected_mood: Optional[str]
+    feelings: Optional[List[str]]
+    sleep_quality: Optional[str]
+    common_issues: Optional[List[str]]
+    notes: Optional[str]
+    meal_type: Optional[str]
+    meal_description: Optional[str]
+    enjoyed_meal: bool
+    good_appetite: bool
+    enough_fluids: bool
+    pain_areas: Optional[List[str]]
+    
     class Config:
         orm_mode = True

@@ -1,87 +1,97 @@
+import { Component } from '@angular/core';
+import { DailyCheckService } from '../../services/daily-check.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, RouterOutlet } from '@angular/router';
-
-interface Medication {
-  time: string;
-  name: string;
-  taken: boolean;
-}
+import { HeaderComponent } from '../header/header.component';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-daily-checkin',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,RouterOutlet,RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HeaderComponent, NavbarComponent, FooterComponent],
   templateUrl: './daily-checkin.component.html',
-  styleUrl: './daily-checkin.component.css'
+  styleUrls: ['./daily-checkin.component.css'],
 })
+export class DailyCheckInComponent {
+  // Activity Tracking
+  tookWalk = false;
+  didPhysicalActivity = false;
+  stepCount: number | null = null;
+  activityDuration: number | null = null;
 
-export class DailyCheckinComponent implements OnInit {
-  stepCount: number = 0;
-  activityDuration: number = 0;
-  tookWalk: boolean = false;
-  didPhysicalActivity: boolean = false;
+  // Mood Tracking
   moodOptions = [
-    { icon: '☹', value: 0, label: '0' },
-    { icon: '😐', value: 1, label: '1' },
-    { icon: '🙂', value: 2, label: '2' },
-    { icon: '😊', value: 3, label: '3' }
+    { label: 'Happy', icon: '😊', value: 'happy' },
+    { label: 'Sad', icon: '😢', value: 'sad' },
+    { label: 'Neutral', icon: '😐', value: 'neutral' },
   ];
+  selectedMood: string | null = null;
+  feelingOptions = ['Calm', 'Energetic', 'Anxious', 'Depressed'];
 
-  feelingOptions = [
-    "I'm feeling great",
-    "I'm feeling good",
-    "I'm okay",
-    "I'm not doing well",
-    "I'm feeling terrible"
-  ];
-
-  selectedMood: number | null = null;
-
-  sleepQuality: string = '';
+  // Sleep Tracking
+  sleepQuality: string | null = null;
   commonIssues: { [key: string]: boolean } = {
     snoring: false,
     legCramps: false,
     restlessLegs: false,
-    nightSweats: false
+    nightSweats: false,
   };
+
   notes: string = '';
-  mealTypes = ['Breakfast', 'Lunch', 'Snacks', 'Dinner'];
-  selectedMeal: string = '';
+
+  // Meal Logging
+  mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
+  selectedMeal: string | null = null;
   description: string = '';
-  enjoyedMeal: boolean = false;
-  goodAppetite: boolean = false;
-  enoughFluids: boolean = false;
+  enjoyedMeal = false;
+  goodAppetite = false;
+  enoughFluids = false;
 
-
-  painAreas = [
-    'No pain', 'Pain in the head', 'Pain in the neck', 'Pain in the shoulder',
-    'Pain in the chest', 'Pain in the heart', 'Pain in the stomach', 'Pain in the arm',
-    'Pain in the elbow', 'Pain in the back', 'Pain in the leg', 'Pain in the knee',
-    'Pain in the foot', 'Pain in the hip', 'Pain in the hand', 'Pain in the wrist',
-    'Pain in the jaw'
-  ];
-
+  // Pain Tracking
+  painAreas = ['Head', 'Back', 'Legs', 'Arms'];
   selectedPainAreas: string[] = [];
 
-  morningMedications: Medication[] = [
-    { time: '8:00 AM', name: 'Vitamin D 1000IU', taken: false },
-    { time: '8:00 AM', name: 'Lipitor 20mg', taken: false }
-  ];
+  constructor(private dailyCheckService: DailyCheckService) {}
 
-  afternoonMedications: Medication[] = [
-    { time: '2:00 PM', name: 'Aspirin 81mg', taken: false }
-  ];
+  // Activity Tracking Methods
+  updateWalkStatus(status: boolean) {
+    this.tookWalk = status;
+  }
 
-  eveningMedications: Medication[] = [
-    { time: '8:00 PM', name: 'Metformin 1000mg', taken: false },
-    { time: '8:00 PM', name: 'Losartan 50mg', taken: false }
-  ];
+  updatePhysicalActivityStatus(status: boolean) {
+    this.didPhysicalActivity = status;
+  }
 
-  sideEffects: string = '';
+  // Mood Tracking Method
+  selectMood(mood: string) {
+    this.selectedMood = mood;
+  }
 
+  // Sleep Tracking Methods
+  setSleepQuality(quality: string) {
+    this.sleepQuality = quality;
+  }
 
+  toggleIssue(issue: string) {
+    if (issue in this.commonIssues) {
+      this.commonIssues[issue] = !this.commonIssues[issue];
+    }
+  }
+
+  // Meal Logging Method
+  logMeal() {
+    console.log('Meal logged:', {
+      type: this.selectedMeal,
+      description: this.description,
+      enjoyedMeal: this.enjoyedMeal,
+      goodAppetite: this.goodAppetite,
+      enoughFluids: this.enoughFluids,
+    });
+    // Here you would typically call a service method to save the meal data
+  }
+
+  // Pain Tracking Methods
   togglePainArea(area: string) {
     const index = this.selectedPainAreas.indexOf(area);
     if (index > -1) {
@@ -91,77 +101,52 @@ export class DailyCheckinComponent implements OnInit {
     }
   }
 
-  logMeal() {
-    console.log('Logging meal:', {
-      mealType: this.selectedMeal,
-      description: this.description,
-      enjoyedMeal: this.enjoyedMeal,
-      goodAppetite: this.goodAppetite,
-      enoughFluids: this.enoughFluids
-    });
-  }
-
-
-  selectMood(mood: number) {
-    this.selectedMood = mood;
-  }
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  updateWalkStatus(status: boolean): void {
-    this.tookWalk = status;
-  }
-
-  updatePhysicalActivityStatus(status: boolean): void {
-    this.didPhysicalActivity = status;
-  }
-
-  submitCheckIn(): void {
-    // Implement the logic to submit the check-in data
-    console.log('Check-in submitted', {
+  // Submit all the data
+  submitCheckIn() {
+    const checkInData = {
       tookWalk: this.tookWalk,
       didPhysicalActivity: this.didPhysicalActivity,
       stepCount: this.stepCount,
-      activityDuration: this.activityDuration
-    });
+      activityDuration: this.activityDuration,
+      selectedMood: this.selectedMood,
+      sleepQuality: this.sleepQuality,
+      commonIssues: this.commonIssues,
+      notes: this.notes,
+      meal: {
+        type: this.selectedMeal,
+        description: this.description,
+        enjoyedMeal: this.enjoyedMeal,
+        goodAppetite: this.goodAppetite,
+        enoughFluids: this.enoughFluids,
+      },
+      selectedPainAreas: this.selectedPainAreas,
+    };
+
+    this.dailyCheckService.submitDailyCheck(checkInData).subscribe(
+      (response) => {
+        console.log('Daily check-in data submitted successfully', response);
+      },
+      (error) => {
+        console.error('Error submitting daily check-in data', error);
+      }
+    );
   }
 
-  skipCheckIn(): void {
-    // Implement the logic to skip the check-in
+  skipCheckIn() {
     console.log('Check-in skipped');
-  }
-  setSleepQuality(quality: string) {
-    this.sleepQuality = quality;
-  }
-
-  toggleIssue(issue: string) {
-    this.commonIssues[issue] = !this.commonIssues[issue];
-  }
-
-  saveTracking() {
-    console.log('Sleep quality:', this.sleepQuality);
-    console.log('Common issues:', this.commonIssues);
-    console.log('Notes:', this.notes);
-    // Here you would typically send this data to a service
+    // Implement skip logic here, e.g., navigating to another page or resetting form
   }
 
   cancelTracking() {
-    // Reset the form or navigate away
+    console.log('Tracking canceled');
+    // Implement cancel logic here, e.g., resetting form fields or navigating away
   }
 
-  toggleMedication(medication: Medication): void {
-    medication.taken = !medication.taken;
+  saveTracking() {
+    console.log('Tracking saved');
+    // Implement save logic here, similar to submitCheckIn but for sleep tracking specifically
   }
-
-  submitSideEffects(): void {
-    console.log('Side effects submitted:', this.sideEffects);
-    // Here you would typically send this data to a server
-    this.sideEffects = ''; // Clear the input after submission
+  getCommonIssuesKeys(): string[] {
+    return Object.keys(this.commonIssues);
   }
-  
 }
-
-

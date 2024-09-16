@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.elderlycare.app',
-  appName: 'Elderly Care',
+  appName: 'ECSS',
   webDir: 'dist/elderly_care/browser'
 };
 

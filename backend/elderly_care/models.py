@@ -1,6 +1,15 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, Float,Text,ARRAY
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from database import Base
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    username = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
 
 class ElderlyUser(Base):
     __tablename__ = "elderlyusers"
@@ -120,3 +129,27 @@ class Admin(Base):
     name = Column(String)
     email = Column(String, unique=True, index=True)
     phoneNumber = Column(String)
+
+class DailyCheckIn(Base):
+    __tablename__ = "daily_checkins"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    took_walk = Column(Boolean, default=False)
+    did_physical_activity = Column(Boolean, default=False)
+    step_count = Column(Integer, nullable=True)
+    activity_duration = Column(Float, nullable=True)
+    
+    selected_mood = Column(String, nullable=True)
+    feelings = Column(ARRAY(String), nullable=True)
+    
+    sleep_quality = Column(String, nullable=True)
+    common_issues = Column(ARRAY(String), nullable=True)
+    notes = Column(Text, nullable=True)
+    
+    meal_type = Column(String, nullable=True)
+    meal_description = Column(Text, nullable=True)
+    enjoyed_meal = Column(Boolean, default=False)
+    good_appetite = Column(Boolean, default=False)
+    enough_fluids = Column(Boolean, default=False)
+    
+    pain_areas = Column(ARRAY(String), nullable=True)
