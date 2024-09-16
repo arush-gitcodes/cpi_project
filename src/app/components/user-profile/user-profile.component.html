@@ -1,0 +1,18 @@
+<app-header></app-header>
+<app-navbar></app-navbar>
+<div class="profile-container">
+    <button class="back-button">←</button>
+    <h1>Profile</h1>
+    <h2>Create profile</h2>
+    <p>Add your name and age</p>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <input formControlName="name" placeholder="Your name">
+      <input formControlName="age" type="number" placeholder="Your age">
+      <p>Add your health conditions, medications, and emergency contacts.</p>
+      <textarea formControlName="healthConditions" placeholder="Health conditions"></textarea>
+      <textarea formControlName="medications" placeholder="Medications"></textarea>
+      <textarea formControlName="emergencyContacts" placeholder="Emergency contacts"></textarea>
+      <button type="submit" class="save-button">Save</button>
+    </form>
+  </div>
+<app-footer></app-footer>
