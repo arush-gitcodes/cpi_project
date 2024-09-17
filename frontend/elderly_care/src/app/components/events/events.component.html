@@ -1,0 +1,71 @@
+<app-header></app-header>
+    <app-navbar></app-navbar>
+    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: "Public Sans", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <div class="gap-1 px-6 flex flex-1 justify-center py-5">
+          <div class="flex flex-col gap-4">
+           
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-3 px-3 py-2">
+                <div class="text-[#181611]">
+                  <!-- SVG for Question icon -->
+                </div>
+              
+          </div>
+        
+          <!-- Main Content -->
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p class="text-[#181611] tracking-light text-[32px] font-bold leading-tight min-w-72">Events</p>
+              <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f5f3f0] text-[#181611] text-sm font-medium leading-normal">
+                <span class="truncate">Filters</span>
+              </button>
+            </div>
+            <div class="flex gap-3 p-3 flex-wrap pr-4">
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#f5f3f0] pl-4 pr-4">
+                <p class="text-[#181611] text-sm font-medium leading-normal">All Events</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#f5f3f0] pl-4 pr-4">
+                <p class="text-[#181611] text-sm font-medium leading-normal">Today</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#f5f3f0] pl-4 pr-4">
+                <p class="text-[#181611] text-sm font-medium leading-normal">Tomorrow</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#f5f3f0] pl-4 pr-4">
+                <p class="text-[#181611] text-sm font-medium leading-normal">This Weekend</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#f5f3f0] pl-4 pr-4">
+                <p class="text-[#181611] text-sm font-medium leading-normal">Next 7 Days</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#f5f3f0] pl-4 pr-4">
+                <p class="text-[#181611] text-sm font-medium leading-normal">Online</p>
+              </div>
+            </div>
+            
+            <!-- Event Cards -->
+            <ng-container *ngFor="let event of events">
+              <div class="p-4 @container">
+                <div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start">
+                  <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                       [style.background-image]="'url(' + event.imageUrl + ')'">
+                  </div>
+                  <div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
+                    <p class="text-[#181611] text-lg font-bold leading-tight tracking-[-0.015em]">{{ event.title }}</p>
+                    <div class="flex items-end gap-3 justify-between">
+                      <div class="flex flex-col gap-1">
+                        <p class="text-[#8a7e60] text-base font-normal leading-normal">{{ event.date }}</p>
+                        <p class="text-[#8a7e60] text-base font-normal leading-normal">{{ event.location }}</p>
+                      </div>
+                      <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f2ad0d] text-[#181611] text-sm font-medium leading-normal">
+                        <span class="truncate">Join</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
