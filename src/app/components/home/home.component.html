@@ -16,12 +16,13 @@
     <div class="relative flex min-h-screen flex-col bg-white overflow-x-hidden">
       <header class="header">
         <div class="header-content">
-          <img src="logo.png" alt="Elderly Care Support System" class="logo">
+          <img src="https://t3.ftcdn.net/jpg/01/42/15/24/360_F_142152431_qZyGglnYiyCm8TF2vzXdT2giJ9uOFG9v.jpg" alt="Caregiver Logo" class="logo">
           <h1 class="welcome">Welcome, {{userName || 'GUEST'}}</h1>
           <div class="date-time">{{currentDateTime}}</div>
         </div>
         <button class="emergency-btn" (click)="playAlarm()">Emergency</button>
       </header>
+      
       <nav class="flex gap-2 border-t border-[#F4EFE6] bg-[#FFFFFF] px-4 pb-3 pt-2">
         <a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full" routerLink="/Home" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
           <div class="flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="fill">
@@ -62,6 +63,14 @@
             </svg>
           </div>
           <p class="text-xs font-medium leading-normal tracking-[0.015em]">Tasks</p>
+        </a>
+        <a class="just flex flex-1 flex-col items-center justify-end gap-1" routerLink="/events" routerLinkActive="active-link">
+          <div class="flex h-8 items-center justify-center" data-icon="Checks" data-size="24px" data-weight="regular">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M149.61,85.71l-89.6,88a8,8,0,0,1-11.22,0L10.39,136a8,8,0,1,1,11.22-11.41L54.4,156.79l84-82.5a8,8,0,1,1,11.22,11.42Zm96.1-11.32a8,8,0,0,0-11.32-.1l-84,82.5-18.83-18.5a8,8,0,0,0-11.21,11.42l24.43,24a8,8,0,0,0,11.22,0l89.6-88A8,8,0,0,0,245.71,74.39Z"></path>
+            </svg>
+          </div>
+          <p class="text-xs font-medium leading-normal tracking-[0.015em]">Events</p>
         </a>
       </nav>
         <main class="flex-1">
@@ -197,8 +206,8 @@
         
         <div class="footer-columns">
           <div class="company-info">
-            <img src="path-to-your-logo.png" alt="Caregiver Logo" class="logo">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <img src="https://t3.ftcdn.net/jpg/01/42/15/24/360_F_142152431_qZyGglnYiyCm8TF2vzXdT2giJ9uOFG9v.jpg" alt="Caregiver Logo" class="logo">
+           <p>ELDERLY CARE AND SUPPORT SYSTEM</p>
             <div class="social-icons">
               <a href="#"><i class="fab fa-facebook-f"></i></a>
               <a href="#"><i class="fab fa-instagram"></i></a>
@@ -210,10 +219,10 @@
           <div class="quick-links">
             <h3>QUICKLINKS</h3>
             <ul>
-              <li>hello&#64;gmail.com</li>
-              <li>(+88) 0123456789</li>
-              <li>Mirpur, Dhaka</li>
-              <li>Dhaka-1216</li>
+              <li>ElderlyCare&#64;gmail.com</li>
+              <li>(+91) 0123456789</li>
+              <li>MIT Bengaluru</li>
+              <li>Karnataka-560064</li>
             </ul>
           </div>
           
@@ -247,6 +256,5 @@
         </div>
       </div>
     </footer>
-
 </body>
 </html>

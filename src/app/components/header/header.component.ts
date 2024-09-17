@@ -11,6 +11,9 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, NgZone, ChangeDetectio
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+triggerEmergency() {
+throw new Error('Method not implemented.');
+}
   private audioContext: AudioContext;
   private oscillator: OscillatorNode | null = null;
   private clockTimer: any;
