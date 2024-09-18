@@ -1,12 +1,13 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, NgZone, OnInit, OnDestroy } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DailyQuotesComponent } from '../daily-quotes/daily-quotes.component';
+import { HealthRiskService } from '../../services/healthrisk.service';
 
 @Component({
   selector: 'app-home',
@@ -37,10 +38,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     private datePipe: DatePipe,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder, private healthRiskService: HealthRiskService
   ) {
     this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    this.healthForm = this.fb.group({
+      heart_rate: ['', Validators.required],
+      systolic_bp: ['', Validators.required],
+      diastolic_bp: ['', Validators.required],
+      blood_sugar: ['', Validators.required],
+      body_temperature: ['', Validators.required],
+      bmi: ['', Validators.required],
+      respiratory_rate: ['', Validators.required],
+      age: ['', Validators.required],
+    });
   }
+ 
 
   ngOnInit() {
     this.updateClock();
@@ -106,4 +119,44 @@ export class HomeComponent implements OnInit, OnDestroy {
       console.log('The dialog was closed');
     });
   }
+  healthForm: FormGroup;
+  predictionResult: any = null;
+  isLoading = false;
+  errorMessage: string = '';
+
+  
+
+  // Handle form submission
+  onSubmit() {
+    if (this.healthForm.invalid) {
+      return;
+    }
+
+    this.isLoading = true;
+    const healthData = this.healthForm.value;
+
+    // Call the service to get the prediction result
+    this.healthRiskService.predictRisk(healthData).subscribe(
+      (result) => {
+        this.predictionResult = result; // Store the entire response
+        this.isLoading = false;
+      },
+      (error) => {
+        this.errorMessage = 'Error occurred while predicting risk';
+        console.error(error);
+        this.isLoading = false;
+      }
+    );
+  }// Close the popup card
+  closePopup() {
+    this.predictionResult = null;
+  }
+
+  hasProbabilities() {
+    return this.predictionResult && this.predictionResult.risk_probabilities;
+}
+navigateTohealthrisk() {
+  this.router.navigate(['/healthrisk']);
+}
+
 }

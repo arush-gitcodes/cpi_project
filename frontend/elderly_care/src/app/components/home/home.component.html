@@ -20,8 +20,10 @@
           <h1 class="welcome">Welcome, {{userName || 'GUEST'}}</h1>
           <div class="date-time">{{currentDateTime}}</div>
         </div>
+        <button class="heath-risk" (click)="navigateTohealthrisk()">Health Risk Predictor</button>
         <button class="emergency-btn" (click)="playAlarm()">Emergency</button>
       </header>
+      
       
       <nav class="flex gap-2 border-t border-[#F4EFE6] bg-[#FFFFFF] px-4 pb-3 pt-2">
         <a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full" routerLink="/Home" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
