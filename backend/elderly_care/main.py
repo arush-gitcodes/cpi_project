@@ -2,6 +2,8 @@
 import os
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from predictor import EnhancedMLHealthRiskPredictor  # Import the predictor class
+from schemas import HealthData  # Import the Pydantic model
 
 from fastapi import FastAPI, Depends, HTTPException,status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -451,6 +453,33 @@ def delete_daily_checkin(checkin_id: int, db: Session = Depends(get_db)):
     crud.delete_daily_checkin(db, checkin_id)
     return {"message": "Daily check-in deleted successfully"}
 
+#Health Predictor
+# Initialize the predictor
+predictor = EnhancedMLHealthRiskPredictor()
+
+# Existing code (if any) here ...
+
+@app.post("/predict/")
+async def predict_health_risk(data: HealthData):
+    try:
+        # Convert Pydantic model to dictionary
+        current_data = data.dict()
+        # Get the risk level and probabilities from the predictor
+        risk_level, risk_probabilities = predictor.predict_risk(current_data)
+        # Map risk level to labels
+        risk_mapping = {0: "Low", 1: "Moderate", 2: "High", 3: "Very High"}
+        return {
+            "risk_level": risk_mapping[risk_level],
+            "risk_probabilities": {
+                "Low": risk_probabilities[0],
+                "Moderate": risk_probabilities[1],
+                "High": risk_probabilities[2],
+                "Very High": risk_probabilities[3],
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -8,6 +8,7 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth/auth.component';
 import { EventsComponent } from './components/events/events.component';
+import { HealthriskComponent } from './components/healthrisk/healthrisk.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
@@ -16,6 +17,8 @@ export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   {path:'profile',component:UserProfileComponent},
   {path:'events',component:EventsComponent},
+  {path:'healthrisk',component:HealthriskComponent},
+
   //{ path: 'profile', component: ProfileComponent },
  { path: 'medication-appointments', component: AppointmentComponent },
   { path: 'daily-check-in', component: DailyCheckInComponent },

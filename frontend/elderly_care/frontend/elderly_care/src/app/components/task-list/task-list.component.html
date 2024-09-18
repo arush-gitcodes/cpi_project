@@ -1,0 +1,113 @@
+<app-header></app-header>
+<app-navbar></app-navbar>
+<div class="relative flex size-full min-h-screen flex-col bg-[#FFFFFF] justify-between group/design-root overflow-x-hidden">
+    <div>
+      <div class="flex items-center bg-[#FFFFFF] p-4 pb-2 justify-between">
+        <div class="text-[#1C160C] flex size-12 shrink-0 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+          </svg>
+        </div>
+        <h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em] flex-1">New Task</h2>
+        <div class="flex w-12 items-center justify-end">
+          <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 bg-transparent text-[#1C160C] gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Title</p>
+          <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] focus:border-[#E9DFCE] h-14 placeholder:text-[#A18249] p-[15px] text-base font-normal leading-normal" [(ngModel)]="taskTitle" />
+        </label>
+      </div>
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Description</p>
+          <textarea class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] focus:border-[#E9DFCE] min-h-36 placeholder:text-[#A18249] p-[15px] text-base font-normal leading-normal" [(ngModel)]="taskDescription"></textarea>
+        </label>
+      </div>
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Category</p>
+          <select class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] focus:border-[#E9DFCE] h-14 bg-[image:--select-button-svg] placeholder:text-[#A18249] p-[15px] text-base font-normal leading-normal" [(ngModel)]="selectedCategory">
+            <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+        <label class="flex flex-col min-w-40 flex-1">
+          <p class="text-[#1C160C] text-base font-medium leading-normal pb-2">Due date</p>
+          <select class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#1C160C] focus:outline-0 focus:ring-0 border border-[#E9DFCE] bg-[#FFFFFF] focus:border-[#E9DFCE] h-14 bg-[image:--select-button-svg] placeholder:text-[#A18249] p-[15px] text-base font-normal leading-normal" [(ngModel)]="selectedDueDate">
+            <option *ngFor="let date of dueDates" [value]="date">{{date}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="flex px-4 py-3 justify-center">
+        <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal tracking-[0.015em]" (click)="saveTask()">
+          <span class="truncate">Save Task</span>
+        </button>
+      </div>
+      <div class="flex items-center bg-[#FFFFFF] p-4 pb-2 justify-between">
+        <div class="text-[#1C160C] flex size-12 shrink-0 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+          </svg>
+        </div>
+        <h2 class="text-[#1C160C] text-lg font-bold leading-tight tracking-[-0.015em] flex-1">Set Due Date</h2>
+        <div class="flex w-12 items-center justify-end">
+          <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 bg-transparent text-[#1C160C] gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-6 p-4">
+        <div class="flex min-w-72 max-w-[336px] flex-1 flex-col gap-0.5">
+          <div class="flex items-center p-1 justify-between">
+            <button (click)="changeMonth('prev')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
+              </svg>
+            </button>
+            <p class="text-[#1C160C] text-base font-bold leading-tight flex-1 text-center">{{currentMonth}}</p>
+            <button (click)="changeMonth('next')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="grid grid-cols-7">
+            <p *ngFor="let day of ['S', 'M', 'T', 'W', 'T', 'F', 'S']" class="text-[#1C160C] text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">{{day}}</p>
+            <ng-container *ngFor="let week of calendarDays">
+              <button *ngFor="let day of week" 
+                class="h-12 w-full" 
+                [ngClass]="{
+                  'text-[#1C160C]': day !== selectedDate,
+                  'text-[#FFFFFF]': day === selectedDate,
+                  'text-sm font-medium leading-normal': true
+                }"
+                (click)="selectDate(day)"
+              >
+                <div class="flex size-full items-center justify-center rounded-full" [ngClass]="{'bg-[#019863]': day === selectedDate}">{{day !== 0 ? day : ''}}</div>
+              </button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="flex px-4 py-3 justify-center">
+        <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#019863] text-[#FFFFFF] text-base font-bold leading-normal tracking-[0.015em]" (click)="setDueDate()">
+          <span class="truncate">Save</span>
+        </button>
+      </div>
+      <div class="flex px-4 py-3 justify-center">
+        <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#F4EFE6] text-[#1C160C] text-base font-bold leading-normal tracking-[0.015em]" (click)="removeDate()">
+          <span class="truncate">Remove date</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>

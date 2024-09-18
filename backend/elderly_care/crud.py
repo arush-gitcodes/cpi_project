@@ -3,9 +3,21 @@ import models
 import schemas
 from passlib.context import CryptContext
 from datetime import datetime
+from models import Prediction  # Assuming you have a Prediction model
+
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+def log_prediction(db: Session, user_id: int, risk_level: str, risk_probabilities: dict):
+    prediction = Prediction(
+        user_id=user_id,
+        risk_level=risk_level,
+        risk_probabilities=risk_probabilities
+    )
+    db.add(prediction)
+    db.commit()
+    db.refresh(prediction)
+    return prediction
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 

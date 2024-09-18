@@ -260,3 +260,13 @@ class DailyCheckInResponse(BaseModel):
     
     class Config:
         orm_mode = True
+
+class HealthData(BaseModel):
+    heart_rate: float
+    systolic_bp: float
+    diastolic_bp: float
+    blood_sugar: float
+    body_temperature: float
+    bmi: float
+    respiratory_rate: float
+    age: int

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, Float,Text,ARRAY
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, Float,Text,ARRAY,JSON
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from database import Base
@@ -153,3 +153,11 @@ class DailyCheckIn(Base):
     enough_fluids = Column(Boolean, default=False)
     
     pain_areas = Column(ARRAY(String), nullable=True)
+    
+class Prediction(Base):
+    __tablename__ = "predictions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, index=True)
+    risk_level = Column(String, index=True)
+    risk_probabilities = Column(JSON)  # Storing the probabilities as JSON

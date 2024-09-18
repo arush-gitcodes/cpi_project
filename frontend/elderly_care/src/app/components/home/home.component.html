@@ -16,12 +16,13 @@
     <div class="relative flex min-h-screen flex-col bg-white overflow-x-hidden">
       <header class="header">
         <div class="header-content">
-          <img src="logo.png" alt="Elderly Care Support System" class="logo">
+          <img src="https://t3.ftcdn.net/jpg/01/42/15/24/360_F_142152431_qZyGglnYiyCm8TF2vzXdT2giJ9uOFG9v.jpg" alt="Caregiver Logo" class="logo">
           <h1 class="welcome">Welcome, {{userName || 'GUEST'}}</h1>
           <div class="date-time">{{currentDateTime}}</div>
         </div>
         <button class="emergency-btn" (click)="playAlarm()">Emergency</button>
       </header>
+      
       <nav class="flex gap-2 border-t border-[#F4EFE6] bg-[#FFFFFF] px-4 pb-3 pt-2">
         <a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full" routerLink="/Home" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
           <div class="flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="fill">
@@ -205,8 +206,8 @@
         
         <div class="footer-columns">
           <div class="company-info">
-            <img src="path-to-your-logo.png" alt="Caregiver Logo" class="logo">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <img src="https://t3.ftcdn.net/jpg/01/42/15/24/360_F_142152431_qZyGglnYiyCm8TF2vzXdT2giJ9uOFG9v.jpg" alt="Caregiver Logo" class="logo">
+           <p>ELDERLY CARE AND SUPPORT SYSTEM</p>
             <div class="social-icons">
               <a href="#"><i class="fab fa-facebook-f"></i></a>
               <a href="#"><i class="fab fa-instagram"></i></a>
@@ -218,10 +219,10 @@
           <div class="quick-links">
             <h3>QUICKLINKS</h3>
             <ul>
-              <li>hello&#64;gmail.com</li>
-              <li>(+88) 0123456789</li>
-              <li>Mirpur, Dhaka</li>
-              <li>Dhaka-1216</li>
+              <li>ElderlyCare&#64;gmail.com</li>
+              <li>(+91) 0123456789</li>
+              <li>MIT Bengaluru</li>
+              <li>Karnataka-560064</li>
             </ul>
           </div>
           
@@ -255,6 +256,5 @@
         </div>
       </div>
     </footer>
-
 </body>
 </html>

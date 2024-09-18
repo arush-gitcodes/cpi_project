@@ -1,0 +1,82 @@
+<app-header></app-header>
+<app-navbar></app-navbar>
+<form [formGroup]="healthForm" (ngSubmit)="onSubmit()">
+  <!-- Form fields -->
+
+  <label for="heart_rate">Heart Rate (bpm):</label>
+  <input type="number" id="heart_rate" formControlName="heart_rate" placeholder="Enter Your Heart Rate" />
+  <div *ngIf="healthForm.get('body_temperature')?.invalid && healthForm.get('body_temperature')?.touched" class="error-message">
+    Body Temperature is required.
+  </div>
+
+  <label for="systolic_bp">Systolic Blood Pressure (mm Hg):</label>
+  <input type="number" id="systolic_bp" formControlName="systolic_bp" placeholder="Enter Your Systolic BP" />
+  <div *ngIf="healthForm.get('systolic_bp')?.invalid && healthForm.get('systolic_bp')?.touched" class="error-message">
+    Systolic BP is required.
+  </div>
+  
+  <label for="diastolic_bp">Diastolic Blood Pressure (mm Hg):</label>
+  <input type="number" id="diastolic_bp" formControlName="diastolic_bp" placeholder="Enter Your Diastolic BP" />
+  <div *ngIf="healthForm.get('diastolic_bp')?.invalid && healthForm.get('diastolic_bp')?.touched" class="error-message">
+    Diastolic BP is required.
+  </div>
+
+  <label for="blood_sugar">Blood Sugar (mg/dL):</label>
+  <input type="number" id="blood_sugar" formControlName="blood_sugar" placeholder="Enter Your Blood Sugar Level"/>
+  <div *ngIf="healthForm.get('blood_sugar')?.invalid && healthForm.get('blood_sugar')?.touched" class="error-message">
+    Blood Sugar is required.
+  </div>
+
+  <label for="body_temperature">Body Temperature (°F):</label>
+  <input type="number" id="body_temperature" formControlName="body_temperature" placeholder="Enter Your Body Temperature in (°F)" />
+  <div *ngIf="healthForm.get('body_temperature')?.invalid && healthForm.get('body_temperature')?.touched" class="error-message">
+    Body Temperature is required.
+  </div>
+
+  <label for="bmi">BMI:</label>
+  <input type="number" id="bmi" formControlName="bmi" placeholder="Enter Your BMI "/>
+  <div *ngIf="healthForm.get('bmi')?.invalid && healthForm.get('bmi')?.touched" class="error-message">
+    BMI is required.
+  </div>
+
+  <label for="respiratory_rate">Respiratory Rate (breaths per minute):</label>
+  <input type="number" id="respiratory_rate" formControlName="respiratory_rate" placeholder="Enter Your Respiratory Rate"/>
+  <div *ngIf="healthForm.get('respiratory_rate')?.invalid && healthForm.get('respiratory_rate')?.touched" class="error-message">
+    Respiratory Rate is required.
+  </div>
+
+  <label for="age">Age (years):</label>
+  <input type="number" id="age" formControlName="age" placeholder="Enter Your Age"/>
+  <div *ngIf="healthForm.get('age')?.invalid && healthForm.get('age')?.touched" class="error-message">
+    Age is required.
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" [disabled]="isLoading">Submit</button>
+</form>
+
+<!-- Loading state -->
+<div *ngIf="isLoading">Loading...</div>
+
+<!-- Popup Card for Health Risk Prediction Result -->
+<div *ngIf="predictionResult && !isLoading" class="popup-card">
+  <div class="card-content">
+    <h3>Health Risk Prediction</h3>
+    <p><strong>Risk Level:</strong> {{ predictionResult.risk_level }}</p>
+
+    <div *ngIf="hasProbabilities()">
+      <h4>Risk Probabilities:</h4>
+      <ul>
+        <li>Low: {{ predictionResult.risk_probabilities[0] }}</li>
+        <li>Moderate: {{ predictionResult.risk_probabilities[1] }}</li>
+        <li>High: {{ predictionResult.risk_probabilities[2] }}</li>
+        <li>Very High: {{ predictionResult.risk_probabilities[3] }}</li>
+      </ul>
+    </div>
+    <!-- Close Button -->
+    <button class="close-btn" (click)="closePopup()">Close</button>
+  </div>
+</div>
+
+<!-- Error Message -->
+<div *ngIf="errorMessage">{{ errorMessage }}</div>

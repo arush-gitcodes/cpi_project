@@ -1,10 +1,12 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { HealthriskComponent } from "../healthrisk/healthrisk.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, HealthriskComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   providers: [DatePipe],
@@ -24,7 +26,8 @@ throw new Error('Method not implemented.');
   constructor(
     private datePipe: DatePipe,
     private cdr: ChangeDetectorRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private router:Router
   ) {
     this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
   }
@@ -65,5 +68,8 @@ throw new Error('Method not implemented.');
         this.oscillator.stop();
       }
     }, 5000);
+  }
+  navigateTohealthrisk(){
+    this.router.navigate(['/healthrisk']);
   }
 }

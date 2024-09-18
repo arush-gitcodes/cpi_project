@@ -9,6 +9,7 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { AuthComponent } from './auth/auth.component';
+import { HealthriskComponent } from './components/healthrisk/healthrisk.component';
 const routes: Routes = [
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
   {path:'auth',component:AuthComponent,data: { isAuth: true }},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   {path:'profile',component:UserProfileComponent},
   {path:'events',component:EventsComponent},
+  {path:'healthrisk',component:HealthriskComponent},
   //{ path: 'profile', component: ProfileComponent },
  { path: 'medication-appointments', component: AppointmentComponent },
   { path: 'daily-check-in', component: DailyCheckInComponent },

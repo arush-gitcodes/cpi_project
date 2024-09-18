@@ -1,9 +1,10 @@
+
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background-color: #f8f9fa; /* Using the background color from the remote branch */
+  background-color:white; /* Using the background color from the remote branch */
   width: 100%;
   box-sizing: border-box;
   flex-wrap: wrap; /* Added from the remote branch */
