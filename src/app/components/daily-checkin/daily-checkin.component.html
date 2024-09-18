@@ -1,0 +1,220 @@
+<!-- health-check.component.html -->
+<app-header></app-header>
+<app-navbar></app-navbar>
+<div class="layout-container">
+  <!-- Activity Check -->
+  <section class="content-section">
+    <h2 class="section-title">How active were you today?</h2>
+    <p class="section-description">
+      We want to know how active you are every day. This will help us understand your health and provide you with better recommendations.
+    </p>
+
+    <div class="activity-item">
+      <div class="activity-content">
+        <p class="activity-label">Step count</p>
+        <p class="activity-question">Did you take a walk today?</p>
+        <p class="activity-description">This could be a stroll around the neighborhood, a walk in the park, or a hike on a trail.</p>
+        <button
+          (click)="updateWalkStatus(true)"
+          [class.active]="tookWalk"
+          class="activity-button"
+        >
+          Yes
+        </button>
+      </div>
+      <div class="activity-image" style="background-image: url('https://cdn.usegalileo.ai/stability/01085c26-4f6e-4f2c-a588-8680a70bc671.png');"></div>
+    </div>
+
+    <div class="activity-item">
+      <div class="activity-content">
+        <p class="activity-question">Did you do any physical activity today?</p>
+        <p class="activity-description">This could be yoga, stretching, strength training, or any other form of physical activity.</p>
+        <button
+          (click)="updatePhysicalActivityStatus(true)"
+          [class.active]="didPhysicalActivity"
+          class="activity-button"
+        >
+          Yes
+        </button>
+      </div>
+      <div class="activity-image" style="background-image: url('https://cdn.usegalileo.ai/stability/4849bc27-9cbf-4035-9015-5bf6b0709bde.png');"></div>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">
+        <span>Pedometer steps (optional)</span>
+        <input [(ngModel)]="stepCount" type="number" placeholder="0" class="input-field">
+      </label>
+      <label class="input-label">
+        <span>Duration (optional)</span>
+        <input [(ngModel)]="activityDuration" type="number" placeholder="0" class="input-field">
+      </label>
+    </div>
+
+    <div class="button-group">
+      <button (click)="skipCheckIn()" class="secondary-button">Skip for now</button>
+      <button (click)="submitCheckIn()" class="primary-button">Submit</button>
+    </div>
+  </section>
+
+  <!-- Mood Check -->
+  <section class="content-section mood-check">
+    <h2 class="section-title">How are you feeling?</h2>
+    <h3 class="subsection-title">Select your mood</h3>
+    
+    <div class="mood-options">
+      <button *ngFor="let mood of moodOptions" 
+              (click)="selectMood(mood.value)"
+              [class.selected]="selectedMood === mood.value"
+              class="mood-button">
+        <span class="mood-icon">{{ mood.icon }}</span>
+        <span class="mood-label">{{ mood.label }}</span>
+      </button>
+    </div>
+    
+    <div class="feeling-options">
+      <button *ngFor="let feeling of feelingOptions" class="feeling-button">
+        <span class="arrow-icon">→</span>
+        {{ feeling }}
+      </button>
+    </div>
+  </section>
+
+  <!-- Sleep Tracker -->
+  <section class="content-section">
+    <h2 class="section-title">How was your sleep?</h2>
+    <p class="section-description">Tell us about your last night's sleep</p>
+
+    <div class="sleep-quality-buttons">
+      <button *ngFor="let quality of ['Great', 'Good', 'Okay', 'Poor']"
+              (click)="setSleepQuality(quality)"
+              [class.active]="sleepQuality === quality"
+              class="sleep-quality-button">
+        {{quality}}
+      </button>
+    </div>
+
+    <h3 class="subsection-title">Common issues</h3>
+    <div class="common-issues">
+      <label *ngFor="let issue of getCommonIssuesKeys()" class="issue-checkbox">
+        <input
+          type="checkbox"
+          [checked]="commonIssues[issue]"
+          (change)="toggleIssue(issue)"
+        >
+        <span>{{issue | titlecase}}</span>
+      </label>
+    </div>
+
+    <textarea
+      [(ngModel)]="notes"
+      placeholder="Add notes"
+      class="notes-textarea"
+    ></textarea>
+
+    <div class="button-group">
+      <button (click)="cancelTracking()" class="secondary-button">Cancel</button>
+      <button (click)="saveTracking()" class="primary-button">Save</button>
+    </div>
+  </section>
+
+  <!-- Meal Logger -->
+  <section class="content-section">
+    <h2 class="section-title">Log a Meal</h2>
+
+    <div class="input-group">
+      <label class="input-label">
+        <span>Meal type</span>
+        <select [(ngModel)]="selectedMeal" class="input-field">
+          <option value="" disabled selected>Select a meal type</option>
+          <option *ngFor="let mealType of mealTypes" [value]="mealType">{{mealType}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">
+        <span>Description</span>
+        <textarea
+          [(ngModel)]="description"
+          placeholder="E.g. 2 scrambled eggs, 1 slice of whole grain bread, 1/2 cup of fresh fruit"
+          class="input-field description-textarea"
+        ></textarea>
+      </label>
+    </div>
+
+    <div class="checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="enjoyedMeal">
+        <span>I enjoyed this meal</span>
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="goodAppetite">
+        <span>I had a good appetite</span>
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="enoughFluids">
+        <span>I drank enough fluids today</span>
+      </label>
+    </div>
+
+    <button (click)="logMeal()" class="primary-button">Log Meal</button>
+  </section>
+
+  <!-- Pain Assessment -->
+  <section class="content-section">
+    <h2 class="section-title">Track your pain</h2>
+    <p class="section-description">Rate your pain on a scale of 0 to 10</p>
+
+    <div class="pain-areas">
+      <button *ngFor="let area of painAreas" 
+              (click)="togglePainArea(area)"
+              [class.active]="selectedPainAreas.includes(area)"
+              class="pain-area-button">
+        {{ area }}
+      </button>
+    </div>
+
+    <p class="section-description">
+      Please select where you feel pain on the body map. If you feel pain in multiple areas, please select all that apply.
+    </p>
+  </section>
+
+  <!-- Medication Tracker -->
+  <section class="content-section medication-tracker">
+    <h2 class="section-title">Medication Adherence Tracker</h2>
+
+    <div class="medication-group">
+      <h3 class="subsection-title">Morning</h3>
+      <div class="medication-item">
+        <div class="medication-info">
+          <span class="medication-icon">
+            <!-- SVG icon here -->
+          </span>
+          <div>
+            <p class="medication-time">8:00 AM</p>
+            <p class="medication-name">Vitamin D 1000IU</p>
+          </div>
+        </div>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <!-- Add more medication items as needed -->
+    </div>
+
+    <!-- Repeat for Afternoon and Evening medication groups -->
+
+    <div class="side-effects">
+      <h3 class="subsection-title">Side Effects</h3>
+      <textarea
+        placeholder="Enter any side effects experienced"
+        class="side-effects-textarea"
+        rows="4"
+      ></textarea>
+      <button class="primary-button">Submit</button>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>
