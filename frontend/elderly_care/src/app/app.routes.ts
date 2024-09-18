@@ -19,11 +19,8 @@ export const routes: Routes = [
   {path:'events',component:EventsComponent},
   {path:'healthrisk',component:HealthriskComponent},
 
-  //{ path: 'profile', component: ProfileComponent },
  { path: 'medication-appointments', component: AppointmentComponent },
   { path: 'daily-check-in', component: DailyCheckInComponent },
  { path: 'tasks', component: TaskListComponent },
-  //{ path: 'social', component: SocialComponent },
-//  { path: 'health', component: HealthComponent },
   { path: '**', redirectTo: '/home' } // Redirect to dashboard for any unknown routes
 ];

@@ -8,6 +8,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DailyQuotesComponent } from '../daily-quotes/daily-quotes.component';
 import { HealthRiskService } from '../../services/healthrisk.service';
+import { HealthriskComponent } from '../healthrisk/healthrisk.component';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ import { HealthRiskService } from '../../services/healthrisk.service';
     HeaderComponent,
     NavbarComponent,
     FooterComponent,
-    MatDialogModule // Add this import
+    MatDialogModule, // Add this import
+    HealthriskComponent
   ],
   providers: [DatePipe],
   templateUrl: './home.component.html',

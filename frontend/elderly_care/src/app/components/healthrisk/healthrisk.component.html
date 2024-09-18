@@ -1,13 +1,22 @@
-<app-header></app-header>
+<header class="header">
+  <div class="header-content">
+    <img src="https://t3.ftcdn.net/jpg/01/42/15/24/360_F_142152431_qZyGglnYiyCm8TF2vzXdT2giJ9uOFG9v.jpg" alt="Caregiver Logo" class="logo">
+    <h1 class="welcome">Welcome, {{userName || 'GUEST'}}</h1>
+    <div class="date-time">{{currentDateTime}}</div>
+  </div>
+  <button class="emergency-btn" (click)="playAlarm()">Emergency</button>
+</header>
+
 <app-navbar></app-navbar>
 <form [formGroup]="healthForm" (ngSubmit)="onSubmit()">
   <!-- Form fields -->
 
   <label for="heart_rate">Heart Rate (bpm):</label>
   <input type="number" id="heart_rate" formControlName="heart_rate" placeholder="Enter Your Heart Rate" />
-  <div *ngIf="healthForm.get('body_temperature')?.invalid && healthForm.get('body_temperature')?.touched" class="error-message">
-    Body Temperature is required.
+  <div *ngIf="healthForm.get('heart_rate')?.invalid && healthForm.get('heart_rate')?.touched" class="error-message">
+    Heart Rate is required.
   </div>
+  
 
   <label for="systolic_bp">Systolic Blood Pressure (mm Hg):</label>
   <input type="number" id="systolic_bp" formControlName="systolic_bp" placeholder="Enter Your Systolic BP" />

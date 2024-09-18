@@ -1,12 +1,12 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { HealthriskComponent } from "../healthrisk/healthrisk.component";
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, DatePipe, HealthriskComponent],
+  imports: [CommonModule, DatePipe, HealthriskComponent,RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   providers: [DatePipe],

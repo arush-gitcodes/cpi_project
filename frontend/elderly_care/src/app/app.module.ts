@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DailyCheckinComponent } from './components/daily-checkin/daily-checkin.component';
+import { DailyCheckInComponent } from './components/daily-checkin/daily-checkin.component';
 import { DatePipe } from '@angular/common';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomeComponent } from './components/home/home.component';
@@ -18,7 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { HealthriskComponent } from './components/healthrisk/healthrisk.component';
 
 
 @NgModule({
@@ -27,8 +27,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,LoginComponent,AppComponent,AppRoutingModule,HomeComponent,
-    DailyCheckinComponent,DashboardComponent,UserProfileComponent,IonicModule.forRoot(),MatDialogModule,MatButtonModule,
-    MatInputModule,MatFormFieldModule
+    DailyCheckInComponent,DashboardComponent,UserProfileComponent,IonicModule.forRoot(),MatDialogModule,MatButtonModule,
+    MatInputModule,MatFormFieldModule,HealthriskComponent
   ],
   providers: [
     AuthService,provideHttpClient(withFetch()),DatePipe,

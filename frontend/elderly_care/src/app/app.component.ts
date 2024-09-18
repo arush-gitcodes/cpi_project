@@ -9,13 +9,14 @@ import { DailyCheckInComponent } from './components/daily-checkin/daily-checkin.
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { filter } from 'rxjs';
 import { EventsComponent } from './components/events/events.component';
+import { HealthriskComponent } from './components/healthrisk/healthrisk.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, LoginComponent, HeaderComponent, FooterComponent,
-     NavbarComponent, HomeComponent,DailyCheckInComponent,UserProfileComponent,EventsComponent],
+     NavbarComponent, HomeComponent,DailyCheckInComponent,UserProfileComponent,EventsComponent,HealthriskComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
