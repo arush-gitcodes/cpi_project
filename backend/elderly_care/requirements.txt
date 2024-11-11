@@ -4,4 +4,4 @@ sqlalchemy
 jose
 passlib
 pydantic
-python-multipart  # Needed for form data handling with OAuth2PasswordRequestForm
+python-multipart  
